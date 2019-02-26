@@ -4,7 +4,7 @@
   "description": "Practicing kubernetes",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "engines": {
     "node": "8.11.3"
@@ -21,6 +21,7 @@
   "homepage": "https://github.com/onojaMatthew/node-kubernetes-test#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "mongoose": "^5.4.15",
     "morgan": "^1.9.1"
