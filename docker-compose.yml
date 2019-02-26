@@ -1,0 +1,23 @@
+version:"3.7"
+
+services:
+  web:
+    build:
+    environment:
+      - NODE_ENV=development
+      - PORT=4000
+      - DB_USER=kubernetes
+      - DB_PASSWORD=kubernetes1
+    ports:
+      - 4000:4000
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongodb:3.4.19-jessie
+    environment:
+      - DB_USER=kubernetes
+      - DB_PASSWORD=kubernetes1
+      - MONGO_DB=message
+    expose:
+      4000

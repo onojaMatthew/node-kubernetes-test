@@ -27,7 +27,13 @@ exports.postMessage = (req, res, next) => {
 exports.updateMessage = (req, res, next) => {
   Message.findByIdAndUpdate(req.params.id)
     .then(message => {
-      res.json(message);
+      if (req.body.sender) message.sender = req.body.sender;
+      if (req.body.message) message.message = req.body.message;
+
+      return message.save()
+        .then(result => {
+          res.json(result);
+        });
     })
     .catch(err => {
       console.log(err.message);

@@ -8,7 +8,7 @@ require("dotenv").config();
 const port = process.env.PORT || 4000;
 
 mongoose.Promise = global.Promise;
-mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@ds131323.mlab.com:31323/kubernetes`, { useNewUrlParser: true })
+mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@ds131323.mlab.com:31323/${process.env.MONGO_DB}`, { useNewUrlParser: true })
   .then(() => {
     console.log("Connection to database established");
   })
