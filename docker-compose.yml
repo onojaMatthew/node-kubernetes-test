@@ -19,5 +19,16 @@ services:
       - DB_USER=kubernetes
       - DB_PASSWORD=kubernetes1
       - MONGO_DB=message
+    ports:
+      - "27017:27017"
+
+  mongo-seed:
+    image: mongodb:3.4.19-jessie
+    links:
+      - mongodb
+    volumes:
+      - ./seed-data:/seed-data
+    command:
+      'bash -c "mongoimport --host mongodb --type json --file /seed-data/projects.json --jsonArray"'
     expose:
       4000

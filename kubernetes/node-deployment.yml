@@ -1,0 +1,23 @@
+apiVersion: extensionv1beta1
+kind: Deployment
+metadata:
+  name: node
+  labels:
+    app: node
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: node
+    spec:
+      containers:
+        - name: kubernetes-test
+          image: smartdockerimage/kubernetes-test
+          env:
+            - name: NODE_ENV
+              value: "development"
+            - name: PORT
+              key: 4000
+          restartPolicy: always
+
