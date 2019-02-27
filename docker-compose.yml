@@ -1,8 +1,8 @@
-version:"3.7"
+version: "3.7"
 
 services:
   web:
-    build:
+    build: .
     environment:
       - NODE_ENV=development
       - PORT=4000
@@ -10,25 +10,16 @@ services:
       - DB_PASSWORD=kubernetes1
     ports:
       - 4000:4000
-    depends_on:
+    links:
       - mongodb
 
   mongodb:
-    image: mongodb:3.4.19-jessie
+    image: mongo:3.2.6
     environment:
       - DB_USER=kubernetes
       - DB_PASSWORD=kubernetes1
       - MONGO_DB=message
+    volumes:
+      - /private/var:/data/db
     ports:
       - "27017:27017"
-
-  mongo-seed:
-    image: mongodb:3.4.19-jessie
-    links:
-      - mongodb
-    volumes:
-      - ./seed-data:/seed-data
-    command:
-      'bash -c "mongoimport --host mongodb --type json --file /seed-data/projects.json --jsonArray"'
-    expose:
-      4000

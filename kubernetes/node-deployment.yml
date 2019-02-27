@@ -1,4 +1,4 @@
-apiVersion: extensionv1beta1
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: node
@@ -13,11 +13,10 @@ spec:
     spec:
       containers:
         - name: kubernetes-test
-          image: smartdockerimage/kubernetes-test
+          image: gcr.io/kubernetesproject-232209/kubernetes-test:v1.0.0 
           env:
             - name: NODE_ENV
               value: "development"
             - name: PORT
-              key: 4000
-          restartPolicy: always
+              value: "4000"
 
