@@ -1,0 +1,42 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata: 
+  name: mongodb
+  labels:
+    name: mongodb
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: mongodb
+      labels:
+        service: mongodb
+    spec:
+      containers:
+        - name: mongodb
+          image: mongo:3.2.6
+          volumeMounts:
+            - name: mongodb-volume-mount
+              mountPath: /var/lib/mongodb/data
+              subPath: mongodb
+          env:
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secrets
+                  key: user
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secrets
+                  key: password
+            - name: MONGO_DB
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secrets
+                  key: mongodbname
+      restartPolicy: Always
+      volumes:
+        - name: mongodb-volume-mount
+          persistentVolumeClaim:
+            claimName: mongodb-pvc

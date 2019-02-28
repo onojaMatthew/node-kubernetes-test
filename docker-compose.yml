@@ -18,7 +18,7 @@ services:
     environment:
       - DB_USER=kubernetes
       - DB_PASSWORD=kubernetes1
-      - MONGO_DB=message
+      - MONGO_DB=kubernetes
     volumes:
       - /private/var:/data/db
     ports:
