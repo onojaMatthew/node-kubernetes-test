@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongodb-pvc
+  labels:
+    type: local
+spec:
+  accessModes:
+    - readWriteOnce
+  resources:
+    requests: 
+      storage: 50Gi
+    volumeName: mongodb-pv
