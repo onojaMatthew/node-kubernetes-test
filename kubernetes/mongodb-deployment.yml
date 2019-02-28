@@ -17,7 +17,7 @@ spec:
           image: mongo:3.2.6
           volumeMounts:
             - name: mongodb-volume-mount
-              mountPath: /var/lib/mongodb/data
+              mountPath: /private/mongodb/data
               subPath: mongodb
           env:
             - name: DB_USER
