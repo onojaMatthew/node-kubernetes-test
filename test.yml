@@ -1,60 +1,29 @@
 # apiVersion: v1
-# kind: Secret
+# kind: PersistentVolume
 # metadata:
-#   name: database-credentials
-# type: Opaque
-# data:
-#   user: TWF0dGhldw==
-#   password: aWdvY2hlbWF0N0BA
-
-# apiVersion: extensions/v1beta1
-# kind: Deployment
-# metadat:
-#   name: node-deployment
-#   labels: 
-#     app: node
-# spec:
-#   replicas: 1
-#   template:
-#     metadata:
-#       name: node
-#       labels:
-#         name: node
-#     containers:
-#       - name: node
-#         image: gcr.io/kubernetesproject-232209
-#         env:
-#           - name: NODE_ENV
-#             value: "development"
-#           - name: PORT
-#             value: "4000"
-#     restartPolicy: Always
-
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: node-service
+#   name: mongodb-pv
 #   labels:
-#     service: node
+#     name: mongodb-pv
 # spec:
-#   selector:
-#     app: node
-#   type: LoadBalancer
-#   ports:
-#     - port: 4000
+#   capacity:
+#     storage: 50Gi
+#   storageClassName: standard
+#   accessModes:
+#     - readWriteOnce
+#   gcePersistentDisk:
+#     pdName: pg-data-disk
+#     fsType: ext4  
 
 apiVersion: v1
-kind: PersistenceVolume
-metadata: 
-  name: persistence-v
+kind: PersistentVolumeClaim
+metadata:
+  name: mongodb-pvc
   labels:
-    name: persistence-v
+    type: local
 spec:
-  capacity:
-    storage: 50GB
-  storageClassName: standard
-  accessMode:
+  accessModes:
     - readWriteOnce
-  gcePersistenceDisk:
-    
-  
+  resources:
+    requests:
+      storage: 50Gi
+  volumeName: mongodb-pv

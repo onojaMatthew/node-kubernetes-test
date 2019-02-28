@@ -9,7 +9,7 @@ spec:
     storage: 50Gi
   storageClassName: standard
   accessModes: 
-    - readWriteOnce
+    - ReadWriteOnce
   gcePersistentDisk: 
     pdName: pg-data-disk
     fsType: ext4

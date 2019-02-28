@@ -6,8 +6,8 @@ metadata:
     type: local
 spec:
   accessModes:
-    - readWriteOnce
+    - ReadWriteOnce
   resources:
     requests: 
       storage: 50Gi
-    volumeName: mongodb-pv
+  volumeName: mongodb-pv
