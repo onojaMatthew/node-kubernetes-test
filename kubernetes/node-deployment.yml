@@ -12,7 +12,7 @@ spec:
         app: node
     spec:
       containers:
-        - name: kubernetes-test
+        - name: node
           image: gcr.io/kubernetesproject-232209/kubernetes-test:v1.0.0 
           env:
             - name: NODE_ENV
